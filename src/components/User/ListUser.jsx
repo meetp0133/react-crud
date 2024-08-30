@@ -9,6 +9,14 @@ function ListUser({ userListData, setEditData }) {
     setEditData(user)
   }
 
+
+  const handleDelete = (user) => {
+      console.log(userListData);
+      const index = userListData.indexOf(item => item.Id == user.id)
+      console.log('index',index);
+      
+  }
+
   return (
     <>
       <div className="table-container">
@@ -36,6 +44,9 @@ function ListUser({ userListData, setEditData }) {
                 <td>{user.bio}</td>
                 <td>
                   <button onClick={() => handleEdit(user)}>Edit</button>
+                </td>
+                <td>
+                  <button onClick={() => handleDelete(user)}>Delete</button>
                 </td>
               </tr>
             ))}
