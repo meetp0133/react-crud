@@ -1,55 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import "./ListUser.css"
 
-function ListUser() {
-    let [users, setUserList] = useState([]);
+function ListUser({ userListData, setEditData }) {
+  console.log('userListData', userListData)
 
-    const { userListData } = useSelector(state => state.user)
-    console.log('userListData',userListData);
-    // const dispatch = useDispatch()
-
-    // // Function to load users from localStorage
-    const loadUsers = () => {
-      users = JSON.parse(localStorage.getItem("users")) || [];
-      setUserList(users);
-    };
-  
-    // Load users when the component mounts
-    useEffect(() => {
-      loadUsers();
-    }, []);
+  const handleEdit = (user) => {
+    // console.log('edit', user, index)
+    setEditData(user)
+  }
 
   return (
     <>
       <div className="table-container">
-      <table>
-        <caption>
-          <h1 className="text-center font-bold text-2xl underline black">User List</h1>
-        </caption>
-        <colgroup>
-          <col />
-          <col />
-          <col />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Bio</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.bio}</td>
+        <table>
+          <caption>
+            <h1 className="text-center font-bold text-2xl underline black">User List</h1>
+          </caption>
+          <colgroup>
+            <col />
+            <col />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Bio</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {userListData?.length > 0 && userListData?.map((user, index) => (
+              <tr key={index}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.bio}</td>
+                <td>
+                  <button onClick={() => handleEdit(user)}>Edit</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }
