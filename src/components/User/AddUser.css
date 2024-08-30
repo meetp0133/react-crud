@@ -1,0 +1,49 @@
+body {
+    font-size: 16px;
+    font-family: "Helvetica Neue", sans-serif;
+    background: whitesmoke;
+    color: #555555;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    margin: 100px;
+    box-sizing: border-box;
+  }
+  
+  /* #NiceAndSimple: Input and Dropdown Menu - https://codepen.io/tomsoderlund/pen/GNBbWz */
+  input,
+  .input,
+  textarea,
+  select {
+    background-color: white;
+    color: inherit;
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+    border-radius: 0.2em;
+    border: 1px solid lightgray;
+    box-shadow: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    padding: 0.6em;
+    margin-right: 0.6em;
+    min-width: 15em;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: lightgray;
+  }
+  input:hover:not(:disabled):not(:focus),
+  .input:hover:not(:disabled):not(:focus),
+  textarea:hover:not(:disabled):not(:focus),
+  select:hover:not(:disabled):not(:focus) {
+    border-color: silver;
+  }
+  
+  
