@@ -1,28 +1,34 @@
 import React from "react";
-import "./ListUser.css"
+import "./ListUser.css";
 
-function ListUser({ userListData, setEditData }) {
-  console.log('userListData', userListData)
+function ListUser({ userListData, setEditData, setDeleteData }) {
+  console.log("userListData", userListData);
 
   const handleEdit = (user) => {
     // console.log('edit', user, index)
-    setEditData(user)
-  }
-
+    setEditData(user);
+  };
 
   const handleDelete = (user) => {
-      console.log(userListData);
-      const index = userListData.indexOf(item => item.Id == user.id)
-      console.log('index',index);
-      
-  }
+    const index = userListData.findIndex((item) => item.Id == user.Id);
+    if (index !== -1) {
+      userListData.splice(index, 1);
+    }
+    setDeleteData(userListData);
+
+    if (userListData?.length > 0) {
+      localStorage.setItem("userData", JSON.stringify(userListData));
+    }
+  };
 
   return (
     <>
       <div className="table-container">
         <table>
           <caption>
-            <h1 className="text-center font-bold text-2xl underline black">User List</h1>
+            <h1 className="header text-center font-bold text-2xl underline black">
+              User List
+            </h1>
           </caption>
           <colgroup>
             <col />
@@ -34,22 +40,27 @@ function ListUser({ userListData, setEditData }) {
               <th>Name</th>
               <th>Email</th>
               <th>Bio</th>
+              <th>Action Button</th>
             </tr>
           </thead>
           <tbody>
-            {userListData?.length > 0 && userListData?.map((user, index) => (
-              <tr key={index}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.bio}</td>
-                <td>
-                  <button onClick={() => handleEdit(user)}>Edit</button>
-                </td>
-                <td>
-                  <button onClick={() => handleDelete(user)}>Delete</button>
-                </td>
-              </tr>
-            ))}
+            {userListData?.length > 0 &&
+              userListData?.map((user, index) => (
+                <tr key={index}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.bio}</td>
+                  <td>
+                    <button
+                      className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => handleEdit(user)}
+                    >
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(user)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
@@ -58,5 +69,3 @@ function ListUser({ userListData, setEditData }) {
 }
 
 export default ListUser;
-
-

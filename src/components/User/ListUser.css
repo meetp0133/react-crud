@@ -24,6 +24,10 @@ table {
       }
       &:nth-child(3) {
         background: #e3f4df;
+        border-left: 7px solid #fff;
+      }
+      &:nth-child(4) {
+        background: #fffaee;
         border-radius: 0 20px 0 0;
         border-left: 7px solid #fff;
       }
@@ -83,5 +87,31 @@ table {
       content: attr(data-cell);
       background: #fffaee;
     }
+  }
+
+  .table-container {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto; /* Add vertical scroll bar */
+    border: 1px solid #ddd; /* Optional: add a border for better visibility */
+  }
+
+  table {
+    
+    width: 100%;
+    border-collapse: collapse; /* Optional: remove gaps between cells */
+  }
+
+  th, td {
+    padding: 8px; /* Optional: add some padding for readability */
+    border: 1px solid #ddd; /* Optional: add borders to cells */
+    text-align: left; /* Optional: align text to the left */
+  }
+
+  th {
+    background-color: #f4f4f4; /* Optional: add a background color to table headers */
+  }
+
+  button {
+    margin-right: 8px; /* Optional: add some space between buttons */
   }
   
