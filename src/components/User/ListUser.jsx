@@ -52,12 +52,14 @@ function ListUser({ userListData, setEditData, setDeleteData }) {
                   <td>{user.bio}</td>
                   <td>
                     <button
-                      className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
+                      className="bg-indigo-500 text-white rounded-lg m-2 px-2 py-2 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
                       onClick={() => handleEdit(user)}
                     >
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(user)}>Delete</button>
+                    <button 
+                      className="bg-indigo-500 text-white rounded-lg m-2 px-2 py-2 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+                      onClick={() => handleDelete(user)}>Delete</button>
                   </td>
                 </tr>
               ))}

@@ -1,41 +1,56 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./AddUser.css";
-import { v4 as uuidv4 } from 'uuid';
-
+import { v4 as uuidv4 } from "uuid";
 
 function AddUser({ userListData, setUserListData, editData, setEditData }) {
-
-  const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   const addUserHandler = (data) => {
+    console.log("data", data);
+    data.Id = uuidv4();
     if (editData) {
-      const FilterData = userListData?.filter(item => item.Id !== editData?.Id)
-      setUserListData([data, ...FilterData])
+      const FilterData = userListData?.findIndex(
+        (item) => item.Id === editData?.Id
+      );
+      if (FilterData !== -1) {
+        userListData[FilterData].name = data.name;
+        userListData[FilterData].email = data.email;
+        userListData[FilterData].bio = data.bio;
+      }
+
+      console.log('userListData--------->',userListData);
+      setUserListData([...userListData]);
     } else {
-      data.Id = uuidv4()
-      setUserListData(userListData ? [...userListData, data] : [data])
-      setEditData(null)
+      setUserListData(userListData ? [...userListData, data] : [data]);
+      setEditData(null);
     }
-    reset()
+    reset();
   };
 
   useEffect(() => {
     if (userListData?.length > 0) {
-      localStorage.setItem('userData', JSON.stringify(userListData))
+      localStorage.setItem("userData", JSON.stringify(userListData));
     }
-  }, [userListData])
+  }, [userListData]);
 
   useEffect(() => {
     if (editData) {
-      setValue('name', editData?.name)
-      setValue('email', editData?.email)
-      setValue('bio', editData?.bio)
+      setValue("name", editData?.name);
+      setValue("email", editData?.email);
+      setValue("bio", editData?.bio);
     }
-  }, [editData])
+  }, [editData]);
 
   return (
     <div className="m-4">
+      <h1 className="text-center font-bold text-2xl underline black mt-500">User CRUD</h1>
       <form onSubmit={handleSubmit(addUserHandler)}>
         <input
           type="text"
