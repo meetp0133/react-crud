@@ -1,65 +1,78 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ListUser.css";
 
 function ListUser({ userListData, setEditData, setDeleteData }) {
-  console.log("userListData", userListData);
-
   const handleEdit = (user) => {
     // console.log('edit', user, index)
     setEditData(user);
   };
 
   const handleDelete = (user) => {
+    console.log("hear");
+    console.log('user',user);
     const index = userListData.findIndex((item) => item.Id == user.Id);
     if (index !== -1) {
       userListData.splice(index, 1);
     }
+    localStorage.setItem("userData", JSON.stringify(userListData));
     setDeleteData(userListData);
-
-    if (userListData?.length > 0) {
-      localStorage.setItem("userData", JSON.stringify(userListData));
-    }
   };
 
   return (
     <>
-      <div className="table-container">
-        <table>
-          <caption>
-            <h1 className="header text-center font-bold text-2xl underline black">
-              User List
-            </h1>
-          </caption>
+      <div className="table-container max-w-4xl  mx-auto bg-white shadow-lg rounded-lg p-6 mt-4">
+        <h1 className="text-center font-bold text-3xl text-gray-800 mb-6 underline">
+          User List
+        </h1>
+        <table className="min-w-full bg-white">
           <colgroup>
+            <col />
             <col />
             <col />
             <col />
           </colgroup>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Bio</th>
-              <th>Action Button</th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Name
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Email
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Bio
+              </th>
+              <th className="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
             {userListData?.length > 0 &&
               userListData?.map((user, index) => (
-                <tr key={index}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.bio}</td>
-                  <td>
+                <tr key={index} className="hover:bg-gray-100">
+                  <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                    {user.name}
+                  </td>
+                  <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                    {user.email}
+                  </td>
+                  <td className="px-6 py-4 border-b border-gray-200 text-sm text-gray-700">
+                    {user.bio}
+                  </td>
+                  <td className="px-6 py-4 border-b border-gray-200 text-sm">
                     <button
-                      className="bg-indigo-500 text-white rounded-lg m-2 px-2 py-2 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
+                      className="bg-blue-500 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-200 focus:outline-none hover:bg-blue-600 transition-colors duration-200 mr-2"
                       onClick={() => handleEdit(user)}
                     >
                       Edit
                     </button>
-                    <button 
-                      className="bg-indigo-500 text-white rounded-lg m-2 px-2 py-2 focus:ring-2 focus:ring-indigo-200 focus:outline-none"
-                      onClick={() => handleDelete(user)}>Delete</button>
+                    <button
+                      className="bg-red-500 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-red-200 focus:outline-none hover:bg-red-600 transition-colors duration-200"
+                      onClick={() => handleDelete(user)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <AddUser userListData={userListData} setUserListData={setUserListData} editData={editData} setEditData={setEditData} />
-      <ListUser userListData={userListData} setEditData={setEditData} deleteData={deleteData} setDeleteData={setDeleteData} />
+      <ListUser userListData={userListData} setEditData={setEditData} setUserListData={setUserListData} setDeleteData={setDeleteData} />
     </>
   )
 }
