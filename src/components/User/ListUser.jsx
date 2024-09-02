@@ -1,21 +1,17 @@
 import React, { useEffect } from "react";
 import "./ListUser.css";
 
-function ListUser({ userListData, setEditData, setDeleteData }) {
+function ListUser({ userListData, setEditData, setUserListData }) {
+
   const handleEdit = (user) => {
-    // console.log('edit', user, index)
     setEditData(user);
   };
 
   const handleDelete = (user) => {
-    console.log("hear");
-    console.log('user',user);
-    const index = userListData.findIndex((item) => item.Id == user.Id);
-    if (index !== -1) {
-      userListData.splice(index, 1);
-    }
-    localStorage.setItem("userData", JSON.stringify(userListData));
-    setDeleteData(userListData);
+
+    const updatedArr = userListData?.filter((item) => item.Id !== user.Id);
+
+    setUserListData(updatedArr)
   };
 
   return (

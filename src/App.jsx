@@ -6,7 +6,6 @@ function App() {
 
   const [userListData, setUserListData] = useState([])
   const [editData, setEditData] = useState(null)
-  const [deleteData, setDeleteData] = useState(null)
 
   useEffect(() => {
     const LocalData = JSON.parse(localStorage.getItem('userData'))
@@ -16,7 +15,7 @@ function App() {
   return (
     <>
       <AddUser userListData={userListData} setUserListData={setUserListData} editData={editData} setEditData={setEditData} />
-      <ListUser userListData={userListData} setEditData={setEditData} setUserListData={setUserListData} setDeleteData={setDeleteData} />
+      <ListUser userListData={userListData} setEditData={setEditData} setUserListData={setUserListData} />
     </>
   )
 }
