@@ -3,8 +3,9 @@ import "./ListUser.css";
 
 function ListUser({ userListData, setEditData, setUserListData }) {
 
-  const handleEdit = (user) => {
+  const handleEdit = (user) => {       
     setEditData(user);
+
   };
 
   const handleDelete = (user) => {

@@ -13,9 +13,8 @@ function AddUser({ userListData, setUserListData, editData, setEditData }) {
   } = useForm();
 
   const addUserHandler = (data) => {
-    console.log("data", data);
     data.Id = uuidv4();
-    if (editData) {
+    if (editData) {      
       const FilterData = userListData?.findIndex(
         (item) => item.Id === editData?.Id
       );
@@ -27,6 +26,8 @@ function AddUser({ userListData, setUserListData, editData, setEditData }) {
 
       console.log("userListData--------->", userListData);
       setUserListData([...userListData]);
+      setEditData(null);
+
     } else {
       setUserListData(userListData ? [...userListData, data] : [data]);
       setEditData(null);
@@ -104,7 +105,7 @@ function AddUser({ userListData, setUserListData, editData, setEditData }) {
             type="submit"
             className="bg-indigo-500 text-white rounded-lg px-4 py-2 font-semibold focus:ring-2 focus:ring-indigo-200 focus:outline-none hover:bg-indigo-600 transition-colors duration-200"
           >
-            Add User
+            {editData ? "Edit User" : "Add User" }
           </button>
         </div>
       </div>
